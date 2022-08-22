@@ -28,8 +28,11 @@ def divide_novel_into_chapters(filename):
 
     i = 1 #Starting Chapter
     for element in soup.find_all("div", {"type": "chapter"}):
+        # return data by retrieving the tag content
+        clean_data = element.get_text()
+  
         with open(f'output/{output_folder_name}/chapter_{i}', 'w') as output_file:
-            output_file.write(str(element))
+            output_file.write(str(clean_data))
         i += 1
 
 #Get the list of input texts
