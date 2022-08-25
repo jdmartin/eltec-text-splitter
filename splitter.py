@@ -30,7 +30,7 @@ def divide_novel_into_chapters(filename):
     the_year = soup.sourceDesc.find("date").get_text()
 
     #Get the title from the source filename
-    the_title = output_folder_name.replace('_', '—') #Replace space with em-dash to avoid annoying the relationships parser.
+    the_title = output_folder_name.replace('_', '—') #Replace underscore with em-dash to avoid annoying the relationships parser.
 
     i = 1 #Starting Chapter
     for element in soup.find_all("div", {"type": "chapter"}):
