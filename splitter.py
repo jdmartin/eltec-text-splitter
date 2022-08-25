@@ -23,21 +23,21 @@ def divide_novel_into_chapters(filename):
         #Soupify Contents
         soup = BeautifulSoup(contents, features="xml")
 
-    #Create Output Directory
-    os.mkdir(f'output/{output_folder_name}')
-
-    #Get the text date from the source TEI
-    the_year = soup.sourceDesc.find("date").get_text()
+    #Get the year from the source filename
+    the_year = output_folder_name[3:7] #They're regular, so we can cheat
 
     #Get the title from the source filename
     the_title = output_folder_name.replace('_', '—') #Replace underscore with em-dash to avoid annoying the relationships parser.
+
+    #Create Output Directory
+    os.mkdir(f'output/{the_year}-{the_title}')
 
     i = 1 #Starting Chapter
     for element in soup.find_all("div", {"type": "chapter"}):
         # return data by retrieving the tag content
         clean_data = element.get_text()
   
-        with open(f'output/{output_folder_name}/{the_year}-{the_title}-chapter_{i}', 'w') as output_file:
+        with open(f'output/{the_year}-{the_title}/{the_year}-{the_title}-chapter_{i}', 'w') as output_file:
             output_file.write(str(clean_data))
         i += 1
 
