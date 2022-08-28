@@ -29,17 +29,25 @@ def divide_novel_into_chapters(filename):
     #Get the title from the source filename
     the_title = output_folder_name.replace('_', '—') #Replace underscore with em-dash to avoid annoying the relationships parser.
 
-    #Create Output Directory
-    os.mkdir(f'output/{the_year}-{the_title}')
+    #Create Output Directory for Split
+    os.mkdir(f'output/splits/{the_year}-{the_title}')
 
     i = 1 #Starting Chapter
     for element in soup.find_all("div", {"type": "chapter"}):
         # return data by retrieving the tag content
         clean_data = element.get_text()
   
-        with open(f'output/{the_year}-{the_title}/{the_year}-{the_title}-chapter_{i}', 'w') as output_file:
+        with open(f'output/splits/{the_year}-{the_title}/{the_year}-{the_title}-chapter_{i}', 'w') as output_file:
+            output_file.write(str(clean_data))
+
+        with open(f'output/bucket/{the_year}-{the_title}-chapter_{i}', 'w') as output_file:
             output_file.write(str(clean_data))
         i += 1
+
+
+#Prepare bucket and splits folders
+os.mkdir('output/splits')
+os.mkdir('output/bucket')
 
 #Get the list of input texts
 get_all_source_texts()
