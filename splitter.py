@@ -39,8 +39,10 @@ def divide_novel_into_chapters(filename):
     the_publisher = soup.publisher.get_text()
 
     #Create Output Directories for Splits
-    os.mkdir(f'output/splits/{the_year}-{the_title}')
-    os.mkdir(f'output/tei_splits/{the_year}-{the_title}')
+    if not os.path.exists(f'output/splits/{the_year}-{the_title}'):
+       os.mkdir(f'output/splits/{the_year}-{the_title}')
+    if not os.path.exists(f'output/tei_splits/{the_year}-{the_title}'):
+        os.mkdir(f'output/tei_splits/{the_year}-{the_title}')
 
     i = 1 #Starting Chapter
     for element in soup.find_all("div", {"type": "chapter"}):
@@ -65,10 +67,11 @@ def divide_novel_into_chapters(filename):
 
 
 #Prepare bucket and splits folders
-os.mkdir('output/splits') #No TEI, broken up by book
-os.mkdir('output/tei_splits') #With TEI, broken up by book
-os.mkdir('output/bucket') #With TEI, all in one folder
-os.mkdir('output/tei_bucket') #With TEI, all in one folder
+list_of_paths = ['output/splits', 'output/tei_splits', 'output/bucket', 'output/tei_bucket']
+#No TEI, broken up by book, With TEI, broken up by book, No TEI, all in one folder, With TEI, all in one folder
+for item in list_of_paths:
+    if not os.path.exists(item):
+        os.mkdir(item) 
 
 #Get the list of input texts
 get_all_source_texts()
