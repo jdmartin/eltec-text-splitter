@@ -1,8 +1,5 @@
 [tool.poetry]
-name = "eltec-text-splitter"
-version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+package-mode = false
 license = "MIT"
 
 [tool.poetry.dependencies]
