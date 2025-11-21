@@ -9,7 +9,17 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 7
+  - package-ecosystem: "poetry"
+    directory: "/" # location of your pyproject.toml and poetry.lock
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 7
   - package-ecosystem: "github-actions" #See: https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot
     directory: "/"
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 7
